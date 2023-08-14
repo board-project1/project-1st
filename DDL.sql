@@ -20,15 +20,8 @@ CREATE TABLE `comments` (
   `created_at` timestamp
 );
 
-CREATE TABLE `heart` (
-	`id` BIGINT(20),
-    `user_id` VARCHAR(50)
-);
-
 ALTER TABLE `posts` ADD FOREIGN KEY (`author`) REFERENCES `users` (`email`);
 
 ALTER TABLE `comments` ADD FOREIGN KEY (`author`) REFERENCES `users` (`email`);
 
 ALTER TABLE `comments` ADD FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
-
-ALTER TABLE `heart` ADD FOREIGN KEY(`user_id`) REFERENCES `users`(`email`);
