@@ -36,6 +36,4 @@ public class LikePostEntity {
         this.userEntity = userEntity;
         this.status = true;
     }
-
-
 }
