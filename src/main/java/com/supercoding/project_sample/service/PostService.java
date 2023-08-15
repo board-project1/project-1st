@@ -26,6 +26,10 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public List<PostEntity> findPostListByEmail(String email) {
+        return postRepository.findPostListByEmail(email);
+    }
+
     @Transactional
     public void createPost(AuthInfo authInfo, PostRequest postRequest){
 
