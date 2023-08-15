@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @Builder
 @Getter
 @NoArgsConstructor
@@ -14,4 +16,6 @@ public class PostRequest {
     private String title;
     private String content;
     private String author;
+    private Instant createAt;
+    private Instant updateAt;
 }

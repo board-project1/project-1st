@@ -1,9 +1,12 @@
 package com.supercoding.project_sample.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Optional;
 
 @Builder
 @AllArgsConstructor
@@ -21,7 +24,11 @@ public class PostEntity {
 
     String content;
 
-    String author;
+//    String author;
+    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserEntity user;
 
     @Column(name = "created_at")
     Instant createAt;

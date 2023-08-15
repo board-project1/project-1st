@@ -1,8 +1,11 @@
 package com.supercoding.project_sample.service;
 
 import com.supercoding.project_sample.domain.PostEntity;
+import com.supercoding.project_sample.domain.UserEntity;
+import com.supercoding.project_sample.dto.AuthInfo;
 import com.supercoding.project_sample.dto.PostRequest;
 import com.supercoding.project_sample.repository.PostRepository;
+import com.supercoding.project_sample.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -17,21 +21,26 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     public List<PostEntity> findPostList() {
         return postRepository.findAll();
     }
 
     @Transactional
-    public void createPost(PostRequest postRequest){
+    public void createPost(AuthInfo authInfo, PostRequest postRequest){
+
+        UserEntity user = userRepository.findById(authInfo.getMemberId()).orElseThrow();
+
         PostEntity postEntity = PostEntity.builder()
                 .title(postRequest.getTitle())
                 .content(postRequest.getContent())
-                .author(postRequest.getAuthor())
+                .user(user)
                 .createAt(Instant.now())
                 .updateAt(Instant.now())
                 .build();
         postRepository.save(postEntity);
+
     }
 
     @Transactional

@@ -1,6 +1,8 @@
 package com.supercoding.project_sample.controller;
 
 import com.supercoding.project_sample.domain.PostEntity;
+import com.supercoding.project_sample.domain.UserEntity;
+import com.supercoding.project_sample.dto.AuthInfo;
 import com.supercoding.project_sample.dto.PostRequest;
 import com.supercoding.project_sample.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +33,10 @@ public class PostController {
     // POST
     @PostMapping("/posts")
     public ResponseEntity<String> createPost(
+            AuthInfo authinfo,
             @RequestBody PostRequest postRequest) {
 
-        postService.createPost(postRequest);
+        postService.createPost(authinfo, postRequest);
         return ResponseEntity.ok("생성 성공.");
     }
 
