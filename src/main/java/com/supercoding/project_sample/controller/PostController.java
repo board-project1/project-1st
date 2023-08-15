@@ -1,10 +1,12 @@
 package com.supercoding.project_sample.controller;
 
 import com.supercoding.project_sample.domain.PostEntity;
+import com.supercoding.project_sample.domain.UserEntity;
 import com.supercoding.project_sample.dto.PostRequest;
+import com.supercoding.project_sample.response.Response;
 import com.supercoding.project_sample.service.PostService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +14,14 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api")
 public class PostController {
 
     private final PostService postService;
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping("/posts")
     public List<PostEntity> findPostList() {
@@ -47,4 +52,15 @@ public class PostController {
         postService.deletePost(postId);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/posts/like/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response likePost(@PathVariable Long id,
+                             UserEntity userEntity) {
+        return Response.success(postService.updateLikeOfPost(id, userEntity));
+    }
+
+
+
+
 }
