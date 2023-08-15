@@ -24,7 +24,6 @@ public class PostEntity {
 
     String content;
 
-//    String author;
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "author", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

@@ -7,5 +7,4 @@ import lombok.Getter;
 @AllArgsConstructor(staticName = "of")
 public class AuthInfo {
     private Long memberId;
-    private String email;
 }

@@ -1,7 +1,6 @@
 package com.supercoding.project_sample.controller;
 
 import com.supercoding.project_sample.domain.PostEntity;
-import com.supercoding.project_sample.domain.UserEntity;
 import com.supercoding.project_sample.dto.AuthInfo;
 import com.supercoding.project_sample.dto.PostRequest;
 import com.supercoding.project_sample.service.PostService;
