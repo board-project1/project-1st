@@ -1,6 +1,7 @@
 package com.supercoding.project_sample.controller;
 
 import com.supercoding.project_sample.dto.LoginRequest;
+import com.supercoding.project_sample.dto.LogoutRequest;
 import com.supercoding.project_sample.dto.SignUpRequest;
 import com.supercoding.project_sample.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,17 @@ public class UserController {
         }
 
 
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestBody LogoutRequest logoutRequest) {
+        boolean isLoggedOut = userService.logout(logoutRequest.getEmail());
+
+        if (isLoggedOut) {
+            return ResponseEntity.ok("로그아웃되었습니다.");
+        } else {
+            return ResponseEntity.badRequest().body("로그아웃 실패");
+        }
     }
 
 
