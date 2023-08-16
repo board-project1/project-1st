@@ -6,7 +6,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.Optional;
 
 @Builder
 @AllArgsConstructor
@@ -16,23 +15,48 @@ import java.util.Optional;
 @Entity
 @Table(name = "posts")
 public class PostEntity {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
+    Long id;
 
-    String title;
+    private String title;
 
-    String content;
+    private String content;
 
-    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "author", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private UserEntity user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity author;
 
     @Column(name = "created_at")
-    Instant createAt;
+    private Instant createAt;
 
     @Column(name = "updated_at")
-    Instant updateAt;
+    private Instant updateAt;
 
+    @Column
+    private int liked; // 좋아요 수
+
+    public PostEntity(
+                      String title,
+                      String content,
+                      UserEntity author,
+                      Instant createAt,
+                      Instant updateAt
+    ) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.liked = 0;
+    }
+
+    public void increaseLikeCount() {
+        this.liked += 1;
+    }
+
+    public void decreaseLikeCount() {
+        this.liked -= 1;
+    }
 }
