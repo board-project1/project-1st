@@ -4,46 +4,48 @@ import com.supercoding.project_sample.domain.LikePostEntity;
 import com.supercoding.project_sample.domain.PostEntity;
 import com.supercoding.project_sample.domain.UserEntity;
 import com.supercoding.project_sample.dto.PostRequest;
+import com.supercoding.project_sample.exception.IllegalAccessException;
 import com.supercoding.project_sample.exception.LikeHistoryNotfoundException;
 import com.supercoding.project_sample.exception.PostNotFoundException;
 import com.supercoding.project_sample.repository.LikePostRepository;
 import com.supercoding.project_sample.repository.PostRepository;
+import com.supercoding.project_sample.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class PostService {
     private static final String SUCCESS_LIKE_BOARD = "좋아요 처리 완료";
     private static final String SUCCESS_UNLIKE_BOARD = "좋아요 취소 완료";
 
     private final PostRepository postRepository;
     private final LikePostRepository likePostRepository;
-
-    public PostService(PostRepository postRepository, LikePostRepository likePostRepository) {
-        this.postRepository = postRepository;
-        this.likePostRepository = likePostRepository;
-    }
+    private final UserRepository userRepository;
 
     public List<PostEntity> findPostList() {
         return postRepository.findAll();
     }
 
-    @Transactional
-    public void createPost(PostRequest postRequest){
-        PostEntity postEntity = PostEntity.builder()
-                .title(postRequest.getTitle())
-                .content(postRequest.getContent())
-                .author(postRequest.getAuthor())
-                .createAt(Instant.now())
-                .updateAt(Instant.now())
-                .build();
-        postRepository.save(postEntity);
+    public PostEntity createPost(String title, String content, Long userId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+
+        return postRepository.save(
+                PostEntity.builder()
+                        .title(title)
+                        .content(content)
+                        .author(user)
+                        .createAt(Instant.now())
+                        .build()
+        );
     }
 
     @Transactional
@@ -67,7 +69,7 @@ public class PostService {
     }
 
     @Transactional
-    public String updateLikeOfPost( Long id, UserEntity userEntity) {
+    public String updateLikeOfPost(Long id, final UserEntity userEntity) {
         PostEntity postEntity = postRepository.findById(id)
                 .orElseThrow(PostNotFoundException::new);
 

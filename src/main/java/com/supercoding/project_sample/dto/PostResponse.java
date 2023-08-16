@@ -1,32 +1,28 @@
 package com.supercoding.project_sample.dto;
 
 import com.supercoding.project_sample.domain.PostEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 
-@Data
+@Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class PostResponse {
-    private Long id;
+    private Long postId;
+    private Long userId;
     private String title;
     private String content;
-    private Long liked;
     private Instant createAt;
-    private Instant updateAt;
 
-
-    public static PostResponse toDto(PostEntity postEntity) {
-        return new PostResponse(
-                postEntity.getId(),
-                postEntity.getTitle(),
-                postEntity.getContent(),
-                postEntity.getLiked(),
-                postEntity.getCreateAt(),
-                postEntity.getUpdateAt()
-                );
+    public static PostResponse from(PostEntity postEntity) {
+        return PostResponse.builder()
+                .postId(postEntity.getId())
+                .userId(postEntity.getAuthor().getId())
+                .title(postEntity.getTitle())
+                .content(postEntity.getContent())
+                .createAt(postEntity.getCreateAt())
+                .build();
     }
+
 }

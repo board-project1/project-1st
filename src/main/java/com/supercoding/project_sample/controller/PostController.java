@@ -2,11 +2,11 @@ package com.supercoding.project_sample.controller;
 
 import com.supercoding.project_sample.domain.PostEntity;
 import com.supercoding.project_sample.domain.UserEntity;
+import com.supercoding.project_sample.dto.AuthInfo;
 import com.supercoding.project_sample.dto.PostRequest;
-import com.supercoding.project_sample.response.Response;
+import com.supercoding.project_sample.dto.PostResponse;
 import com.supercoding.project_sample.service.PostService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,11 +29,11 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public ResponseEntity<String> createPost(
-            @RequestBody PostRequest postRequest) {
+    public ResponseEntity<PostResponse> createPost(AuthInfo authInfo,
+                                             @RequestBody PostRequest postRequest) throws IllegalAccessException {
 
-        postService.createPost(postRequest);
-        return ResponseEntity.ok("생성 성공.");
+        PostEntity postEntity = postService.createPost(postRequest.getTitle(), postRequest.getContent(), authInfo.getMemberId());
+        return ResponseEntity.ok(PostResponse.from(postEntity));
     }
 
     @PostMapping("/posts/{postId}")
@@ -53,14 +53,9 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/posts/like/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Response likePost(@PathVariable Long id,
+    @PostMapping("/posts/like/{postid}")
+    public ResponseEntity<String> likePost(@PathVariable Long postid,
                              UserEntity userEntity) {
-        return Response.success(postService.updateLikeOfPost(id, userEntity));
+        return ResponseEntity.ok(postService.updateLikeOfPost(postid, userEntity));
     }
-
-
-
-
 }
