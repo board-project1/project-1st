@@ -22,11 +22,6 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
-//    @PostMapping("/signup")
-//    public ResponseEntity<String> signup(@RequestBody SignUpRequest signUpRequest){
-//        boolean isSuccess = userService.signUp(signUpRequest);
-//        return isSuccess ? ResponseEntity.ok("회원가입이 완료되었습니다.") : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 등록된 이메일입니다.");
-//    }
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signup(@RequestBody SignUpRequest signUpRequest){
         boolean isSuccess = userService.signUp(signUpRequest);
@@ -37,17 +32,6 @@ public class UserController {
         }
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletResponse httpServletResponse) throws Exception {
-//        String token = userService.login(loginRequest);
-//
-//        if (token != null) {
-//            httpServletResponse.setHeader("Authorization", "Bearer " + token);
-//            return ResponseEntity.ok("로그인이 성공적으로 완료되었습니다.");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
-//        }
-//    }
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest, HttpServletResponse httpServletResponse) throws Exception {
         String token = userService.login(loginRequest);
