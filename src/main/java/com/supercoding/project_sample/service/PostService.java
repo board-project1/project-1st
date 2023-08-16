@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -35,7 +34,7 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public PostEntity createPost(String title, String content, Long userId) throws IllegalAccessException {
+    public PostEntity createPost(String title, String content, long userId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
 
         return postRepository.save(
@@ -48,10 +47,17 @@ public class PostService {
         );
     }
 
+    public List<PostEntity> findPostListByEmail(long userId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+        return postRepository.findPostListByEmail(user.getEmail());
+    }
+
     @Transactional
-    public void updatePost(Long postId, PostRequest postRequest) {
+    public void updatePost(long userId, long postId, PostRequest postRequest) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
         PostEntity postEntity = postRepository.findById(postId).orElse(null);
-        if (postEntity != null) {
+
+        if (postEntity != null && user.getEmail().equals(postEntity.getAuthor().getEmail())) {
             postEntity.setTitle(postRequest.getTitle());
             postEntity.setContent(postRequest.getContent());
             postEntity.setUpdateAt(Instant.now());
@@ -61,9 +67,11 @@ public class PostService {
     }
 
     @Transactional
-    public void deletePost(long postId) {
+    public void deletePost(long userId, long postId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
         PostEntity postEntity = postRepository.findById(postId).orElse(null);
-        if (postEntity != null) {
+
+        if (postEntity != null && user.getEmail().equals(postEntity.getAuthor().getEmail())) {
             postRepository.deleteById(postId);
         }
     }

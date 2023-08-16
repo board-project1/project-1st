@@ -1,8 +1,6 @@
 package com.supercoding.project_sample.domain;
 
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -13,7 +11,6 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "posts")
 public class PostEntity {
 
     @Id
