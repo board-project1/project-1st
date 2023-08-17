@@ -18,7 +18,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class JwtService {
-    @Value("supercoding")
+    @Value("${jwt.secretKey}")
     private String secretKey; // jacypt(?) 암호화
 
     public static final String CLAIM_NAME_MEMBER_ID = "MemberId";
@@ -42,6 +42,9 @@ public class JwtService {
     }
 
     public Map<String, Long> decode(String token) {
+        System.out.println("=======================");
+        System.out.println(token);
+        System.out.println("=======================");
         try{
             DecodedJWT jwt = jwtVerifier.verify(token);
             return Map.of(CLAIM_NAME_MEMBER_ID, jwt.getClaim(CLAIM_NAME_MEMBER_ID).asLong());

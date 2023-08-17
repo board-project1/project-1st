@@ -40,6 +40,7 @@ public class UserController {
         if (token != null) {
             httpServletResponse.setHeader("Authorization", "Bearer " + token);
             response.put("message", "로그인이 성공적으로 완료되었습니다.");
+            response.put("token", token);
             return ResponseEntity.ok(response);
         } else {
             response.put("message", "로그인 실패");

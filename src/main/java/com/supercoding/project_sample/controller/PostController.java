@@ -32,8 +32,8 @@ public class PostController {
 
     // 작성자 이메일을 통해 특정 게시물들을 검색하는 API
     @GetMapping("/posts/search")
-    public List<PostEntity> findPostByEmail(@RequestParam String author_email) throws IllegalAccessException {
-        return postService.findPostListByEmail(author_email);
+    public List<PostEntity> findPostByEmail(@RequestParam String email) throws IllegalAccessException {
+        return postService.findPostListByEmail(email);
     }
 
 //    // 게시물을 새롭게 만들 수 있는 API
