@@ -5,6 +5,7 @@ import com.supercoding.project_sample.domain.UserEntity;
 import com.supercoding.project_sample.dto.AuthInfo;
 import com.supercoding.project_sample.dto.PostRequest;
 import com.supercoding.project_sample.dto.PostResponse;
+import com.supercoding.project_sample.exception.IllegalAccessException;
 import com.supercoding.project_sample.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -53,9 +54,10 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/posts/like/{postid}")
-    public ResponseEntity<String> likePost(@PathVariable Long postid,
-                             UserEntity userEntity) {
-        return ResponseEntity.ok(postService.updateLikeOfPost(postid, userEntity));
+    @PostMapping("/posts/like/{postId}")
+    public ResponseEntity<String> likePost(
+            AuthInfo authInfo,
+            @PathVariable Long postId) throws IllegalAccessException {
+        return ResponseEntity.ok(postService.updateLikeOfPost(postId, authInfo.getMemberId()));
     }
 }

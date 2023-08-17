@@ -18,17 +18,16 @@ public class LikePostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "post_id")
     private PostEntity postEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
     // true = 좋아요 false = 좋아요 취소
-    @Column(nullable = false)
+    @Column
     private boolean status;
 
     public LikePostEntity(PostEntity postEntity, UserEntity userEntity) {

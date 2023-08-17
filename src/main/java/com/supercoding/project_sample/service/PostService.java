@@ -69,17 +69,18 @@ public class PostService {
     }
 
     @Transactional
-    public String updateLikeOfPost(Long id, final UserEntity userEntity) {
-        PostEntity postEntity = postRepository.findById(id)
-                .orElseThrow(PostNotFoundException::new);
+    public String updateLikeOfPost(Long postId, Long userId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
 
-        if (!hasLikePost(postEntity, userEntity)) {
-            postEntity.increaseLikeCount();
-            return createLikePost(postEntity, userEntity);
+
+        if (!hasLikePost(post, user)) {
+            post.increaseLikeCount();
+            return createLikePost(post, user);
         }
 
-        postEntity.decreaseLikeCount();
-        return removeLikePost(postEntity, userEntity);
+        post.decreaseLikeCount();
+        return removeLikePost(post, user);
     }
 
 

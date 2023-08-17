@@ -13,7 +13,6 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "posts")
 public class PostEntity {
 
     @Id
