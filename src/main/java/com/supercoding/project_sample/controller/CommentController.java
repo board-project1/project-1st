@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,16 +20,17 @@ public class CommentController {
     private final CommentService commentService;
 
     // 댓글 생성
-    @PostMapping("/comments")
+    @PostMapping("/comments/{postId}")
     public ResponseEntity<CommentResponse> createComment(AuthInfo authInfo,
+                                                         @PathVariable Long postId,
                                                          @RequestBody CommentRequest commentRequest) throws IllegalAccessException {
         CommentEntity commentEntity = commentService.createComment(
-                commentRequest.getContent(), commentRequest.getPostId(), authInfo.getMemberId());
+                commentRequest.getContent(), postId, authInfo.getMemberId());
         return ResponseEntity.ok(CommentResponse.from(commentEntity));
     }
 
     // 댓글 수정
-    @PostMapping("/comments/{commentId}")
+    @PutMapping("/comments/{commentId}")
     public ResponseEntity<CommentResponse> updateComment(AuthInfo authInfo,
                                                          @PathVariable Long commentId,
                                                          @RequestBody CommentRequest commentRequest) throws IllegalAccessException {
@@ -48,8 +50,9 @@ public class CommentController {
         return ResponseEntity.ok("댓글 삭제 성공");
     }
 
+    // 댓글 조회
     @GetMapping("/comments/{postId}")
-    public Optional<CommentEntity> findPostIdComment(@PathVariable Long postId) {
+    public List<CommentEntity> findPostIdComment(@PathVariable Long postId) {
         return commentService.findCommentList(postId);
     }
 }

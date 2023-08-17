@@ -3,6 +3,7 @@ package com.supercoding.project_sample.service;
 import com.supercoding.project_sample.domain.CommentEntity;
 import com.supercoding.project_sample.domain.PostEntity;
 import com.supercoding.project_sample.domain.UserEntity;
+import com.supercoding.project_sample.dto.CommentRequest;
 import com.supercoding.project_sample.exception.CommentNotFoundException;
 import com.supercoding.project_sample.exception.IllegalAccessException;
 import com.supercoding.project_sample.exception.PostNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,8 +26,9 @@ public class CommentService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 
-    public Optional<CommentEntity> findCommentList(Long postId) {
-        return commentRepository.findByPostId(postId);
+    public List<CommentEntity> findCommentList(Long postId) {
+        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        return commentRepository.findByPostId(post);
     }
 
     public CommentEntity createComment(String content, Long postId, Long userId) throws IllegalAccessException {
@@ -39,7 +42,6 @@ public class CommentService {
                         .content(content)
                         .createAt(Instant.now())
                         .build()
-
         );
     }
 
@@ -49,7 +51,7 @@ public class CommentService {
         PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
         CommentEntity comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
 
-        if (post != null && comment != null && user.getEmail().equals(comment.getAuthor().getEmail())) {
+        if (post.getId().equals(postId) && user.getId().equals(comment.getAuthor().getId())) {
             comment.setContent(content);
             comment.setUpdateAt(Instant.now());
 

@@ -1,5 +1,6 @@
 package com.supercoding.project_sample.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class CommentEntity {
     @JoinColumn(name = "user_id")
     private UserEntity author;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
     private PostEntity postId;
