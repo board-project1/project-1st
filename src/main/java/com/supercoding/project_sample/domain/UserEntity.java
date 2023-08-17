@@ -1,5 +1,6 @@
 package com.supercoding.project_sample.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -16,8 +17,11 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
     private String email;
+
+    @JsonIgnore
     private String password;
 
 }
