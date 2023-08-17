@@ -63,8 +63,7 @@ public class UserService {
 
     }
 
-    public boolean logout(String email) {
-
+    public boolean logout(String token) {
         return true;
     }
 }

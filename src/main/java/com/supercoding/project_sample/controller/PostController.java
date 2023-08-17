@@ -36,6 +36,8 @@ public class PostController {
         return postService.findPostListByEmail(email);
     }
 
+
+
 //    // 게시물을 새롭게 만들 수 있는 API
 //    @PostMapping("/posts")
 //    public ResponseEntity<PostResponse> createPost(

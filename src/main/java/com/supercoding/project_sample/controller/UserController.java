@@ -50,7 +50,7 @@ public class UserController {
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@RequestBody LogoutRequest logoutRequest) {
-        boolean isLoggedOut = userService.logout(logoutRequest.getEmail());
+        boolean isLoggedOut = userService.logout(logoutRequest.getToken());
 
         if (isLoggedOut) {
             return ResponseEntity.ok("로그아웃되었습니다.");

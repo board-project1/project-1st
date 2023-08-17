@@ -5,35 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7410c200-6c4a-422b-b404-cad22238a16f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/CreatePostPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/CustomButton.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ListPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/LoginPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/PostDetailPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/StyledTextArea.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/setupTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/PostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-window.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-window.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/LogoutRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/LogoutRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
