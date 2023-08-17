@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
-    @Query("select a from PostEntity a where a.author = ?1")
-    List<PostEntity> findPostListByEmail(String email);
+//    @Query("select a from PostEntity a where a.author = ?1")
+    List<PostEntity> findAllByAuthor_Email(String email);
 }

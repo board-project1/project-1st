@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDateTime ;
 
 @Builder
 @AllArgsConstructor
@@ -21,15 +22,17 @@ public class PostEntity {
 
     private String content;
 
+    private String nickname;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity author;
 
     @Column(name = "created_at")
-    private Instant createAt;
+    private LocalDateTime createAt;
 
     @Column(name = "updated_at")
-    private Instant updateAt;
+    private LocalDateTime updateAt;
 
     @Column
     private int liked; // 좋아요 수
@@ -38,8 +41,8 @@ public class PostEntity {
                       String title,
                       String content,
                       UserEntity author,
-                      Instant createAt,
-                      Instant updateAt
+                      LocalDateTime createAt,
+                      LocalDateTime updateAt
     ) {
         this.title = title;
         this.content = content;

@@ -1,9 +1,11 @@
 package com.supercoding.project_sample.dto;
 
 import com.supercoding.project_sample.domain.PostEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -13,7 +15,9 @@ public class PostResponse {
     private Long userId;
     private String title;
     private String content;
-    private Instant createAt;
+    private String author;
+    private String nickname;
+    private LocalDateTime createAt;
 
     public static PostResponse from(PostEntity postEntity) {
         return PostResponse.builder()
@@ -21,6 +25,8 @@ public class PostResponse {
                 .userId(postEntity.getAuthor().getId())
                 .title(postEntity.getTitle())
                 .content(postEntity.getContent())
+                .author(postEntity.getAuthor().getEmail())
+                .nickname(postEntity.getNickname())
                 .createAt(postEntity.getCreateAt())
                 .build();
     }

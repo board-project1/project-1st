@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -22,6 +23,9 @@ public class CommentEntity {
     @JoinColumn(name = "user_id")
     private UserEntity author;
 
+    @Column
+    private String nickname;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
@@ -31,8 +35,8 @@ public class CommentEntity {
     private String content;
 
     @Column(name = "create_at")
-    private Instant createAt;
+    private LocalDateTime createAt;
 
     @Column(name = "update_at")
-    private Instant updateAt;
+    private LocalDateTime updateAt;
 }

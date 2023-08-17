@@ -32,20 +32,19 @@ public class PostController {
 
     // 작성자 이메일을 통해 특정 게시물들을 검색하는 API
     @GetMapping("/posts/search")
-    public List<PostEntity> findPostByEmail(
-            AuthInfo authInfo) throws IllegalAccessException {
-        return postService.findPostListByEmail(authInfo.getMemberId());
+    public List<PostEntity> findPostByEmail(@RequestParam String author_email) throws IllegalAccessException {
+        return postService.findPostListByEmail(author_email);
     }
 
-    // 게시물을 새롭게 만들 수 있는 API
-    @PostMapping("/posts")
-    public ResponseEntity<PostResponse> createPost(
-            AuthInfo authInfo,
-            @RequestBody PostRequest postRequest) throws IllegalAccessException {
-
-        PostEntity postEntity = postService.createPost(postRequest.getTitle(), postRequest.getContent(), authInfo.getMemberId());
-        return ResponseEntity.ok(PostResponse.from(postEntity));
-    }
+//    // 게시물을 새롭게 만들 수 있는 API
+//    @PostMapping("/posts")
+//    public ResponseEntity<PostResponse> createPost(
+//            AuthInfo authInfo,
+//            @RequestBody PostRequest postRequest) throws IllegalAccessException {
+//
+//        PostEntity postEntity = postService.createPost(postRequest.getTitle(), postRequest.getContent(), authInfo.getMemberId());
+//        return ResponseEntity.ok(PostResponse.from(postEntity));
+//    }
 
     // 기존 댓글의 글을 수정하는 API
     @PutMapping("/posts/{postId}")
@@ -72,5 +71,17 @@ public class PostController {
             AuthInfo authInfo,
             @PathVariable Long postId) throws IllegalAccessException {
         return ResponseEntity.ok(postService.updateLikeOfPost(postId, authInfo.getMemberId()));
+    }
+
+
+    // 노션
+    // 게시물을 새롭게 만들 수 있는 API
+    @PostMapping("/posts")
+    public ResponseEntity<PostResponse> createPost2(
+            AuthInfo authInfo,
+            @RequestBody PostRequest postRequest) throws IllegalAccessException {
+
+        PostEntity postEntity = postService.createPost2(postRequest.getTitle(), postRequest.getContent(), postRequest.getNickname(), authInfo.getMemberId());
+        return ResponseEntity.ok(PostResponse.from(postEntity));
     }
 }

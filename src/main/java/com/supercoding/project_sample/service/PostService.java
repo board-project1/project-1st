@@ -14,8 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -42,14 +41,13 @@ public class PostService {
                         .title(title)
                         .content(content)
                         .author(user)
-                        .createAt(Instant.now())
+                        .createAt(LocalDateTime.now())
                         .build()
         );
     }
 
-    public List<PostEntity> findPostListByEmail(long userId) throws IllegalAccessException {
-        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
-        return postRepository.findPostListByEmail(user.getEmail());
+    public List<PostEntity> findPostListByEmail(String email) {
+        return postRepository.findAllByAuthor_Email(email);
     }
 
     @Transactional
@@ -60,7 +58,7 @@ public class PostService {
         if (postEntity != null && user.getEmail().equals(postEntity.getAuthor().getEmail())) {
             postEntity.setTitle(postRequest.getTitle());
             postEntity.setContent(postRequest.getContent());
-            postEntity.setUpdateAt(Instant.now());
+            postEntity.setUpdateAt(LocalDateTime.now());
 
             postRepository.save(postEntity);
         }
@@ -107,5 +105,20 @@ public class PostService {
         likePostRepository.delete(likePostEntity);
 
         return SUCCESS_UNLIKE_BOARD;
+    }
+
+    @Transactional
+    public PostEntity createPost2(String title, String content, String nickname, Long userId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+
+        return postRepository.save(
+                PostEntity.builder()
+                        .title(title)
+                        .content(content)
+                        .author(user)
+                        .nickname(nickname)
+                        .createAt(LocalDateTime.now())
+                        .build()
+        );
     }
 }

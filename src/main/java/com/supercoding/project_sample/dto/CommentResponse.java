@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -14,9 +14,10 @@ public class CommentResponse {
     private Long commentId;
     private Long postId;
     private Long userId;
-    private String author;
+    private String nickname;
     private String content;
-    private Instant createAt;
+    private LocalDateTime createAt;
+    private String author;
 
     public static CommentResponse from(CommentEntity commentEntity) {
         return CommentResponse.builder()
@@ -24,6 +25,7 @@ public class CommentResponse {
                 .postId(commentEntity.getPostId().getId())
                 .userId(commentEntity.getAuthor().getId())
                 .author(commentEntity.getAuthor().getEmail())
+                .nickname(commentEntity.getNickname())
                 .content(commentEntity.getContent())
                 .createAt(commentEntity.getCreateAt())
                 .build();

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +42,7 @@ public class CommentService {
                         .author(user)
                         .postId(post)
                         .content(content)
-                        .createAt(Instant.now())
+                        .createAt(LocalDateTime.now())
                         .build()
         );
     }
@@ -53,7 +55,7 @@ public class CommentService {
 
         if (post.getId().equals(postId) && user.getId().equals(comment.getAuthor().getId())) {
             comment.setContent(content);
-            comment.setUpdateAt(Instant.now());
+            comment.setUpdateAt(LocalDateTime.now());
 
             commentRepository.save(comment);
         }
@@ -72,4 +74,37 @@ public class CommentService {
     }
 
 
+    public List<CommentEntity> findCommentAll() {
+        return commentRepository.findAll();
+    }
+
+
+    // 노션
+    @Transactional
+    public CommentEntity createComment2(String content, String nickname, Long postId, Long userId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        return commentRepository.save(
+                CommentEntity.builder()
+                        .nickname(nickname)
+                        .author(user)
+                        .postId(post)
+                        .content(content)
+                        .createAt(LocalDateTime.now())
+                        .build()
+        );
+    }
+    @Transactional
+    public CommentEntity updateComment2(String content, Long userId, Long commentId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+        CommentEntity comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
+
+        if (user.getId().equals(comment.getAuthor().getId())) {
+            comment.setContent(content);
+            comment.setUpdateAt(LocalDateTime.now());
+
+            commentRepository.save(comment);
+        }
+        return comment;
+    }
 }

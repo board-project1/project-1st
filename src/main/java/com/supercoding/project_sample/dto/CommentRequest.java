@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class CommentRequest {
-    String author;
+    String nickname;
     String content;
     Long postId;
 }

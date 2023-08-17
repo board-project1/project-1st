@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime ;
 import java.util.Date;
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class JwtService {
     }
 
     public String encode(Long memberId){
-        LocalDateTime expiredAt = LocalDateTime.now().plusWeeks(4L);
+        LocalDateTime  expiredAt = LocalDateTime .now().plusWeeks(4L);
         Date date = Timestamp.valueOf(expiredAt);
 
         return JWT.create()
