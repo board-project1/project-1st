@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent, TextField, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
-import { blue, CustomButton } from './CustomButton';
-import { StyledTextarea } from './StyledTextArea';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Card, CardContent, TextField, Typography} from '@mui/material';
+import {red} from '@mui/material/colors';
+import {blue, CustomButton} from './CustomButton';
+import {StyledTextarea} from './StyledTextArea';
+import {useNavigate} from 'react-router-dom';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
