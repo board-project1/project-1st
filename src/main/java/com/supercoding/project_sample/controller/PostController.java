@@ -1,6 +1,5 @@
 package com.supercoding.project_sample.controller;
 
-import com.supercoding.project_sample.domain.LikePostEntity;
 import com.supercoding.project_sample.domain.PostEntity;
 import com.supercoding.project_sample.dto.AuthInfo;
 import com.supercoding.project_sample.dto.LikePostResponse;
@@ -38,7 +37,7 @@ public class PostController {
 
     // 작성자 이메일을 통해 특정 게시물들을 검색하는 API
     @GetMapping("/posts/search")
-    public List<PostEntity> findPostByEmail(@RequestParam String email) {
+    public List<LikePostResponse> findPostByEmail(@RequestParam String email) throws IllegalAccessException {
         return postService.findPostListByEmail(email);
     }
 

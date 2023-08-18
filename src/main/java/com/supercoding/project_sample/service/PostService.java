@@ -75,8 +75,23 @@ public class PostService {
 
     // 이메일 조회
     @Transactional
-    public List<PostEntity> findPostListByEmail(String email) {
-        return postRepository.findAllByAuthor_Email(email);
+    public List<LikePostResponse> findPostListByEmail(String email) throws IllegalAccessException {
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(IllegalAccessException::new);
+        List<PostEntity> postEntities = postRepository.findAllByAuthor_Email(email);
+        List<LikePostEntity> likePostEntities = likePostRepository.findByUserEntity_Id(user.getId());
+        Set<Long> likedPostIds = likePostEntities.stream().map((e) -> e.getPostEntity().getId()).collect(Collectors.toSet());
+
+        return postEntities.stream().map((p) -> {
+            LikePostResponse likePostResponse = new LikePostResponse();
+            likePostResponse.setId(p.getId());
+            likePostResponse.setTitle(p.getTitle());
+            likePostResponse.setContent(p.getContent());
+            likePostResponse.setAuthor(p.getAuthor().getEmail());
+            likePostResponse.setCreateAt(p.getCreateAt());
+            likePostResponse.setLikeCount(p.getLiked());
+            likePostResponse.setIsLiked(likedPostIds.contains(p.getId()));
+            return likePostResponse;
+        }).collect(Collectors.toList());
     }
 
     // 게시글 수정
