@@ -3,7 +3,9 @@ package com.supercoding.project_sample.service;
 import com.supercoding.project_sample.domain.LikePostEntity;
 import com.supercoding.project_sample.domain.PostEntity;
 import com.supercoding.project_sample.domain.UserEntity;
+import com.supercoding.project_sample.dto.LikePostResponse;
 import com.supercoding.project_sample.dto.PostRequest;
+import com.supercoding.project_sample.dto.PostResponse;
 import com.supercoding.project_sample.exception.IllegalAccessException;
 import com.supercoding.project_sample.exception.LikeHistoryNotfoundException;
 import com.supercoding.project_sample.exception.PostNotFoundException;
@@ -12,10 +14,16 @@ import com.supercoding.project_sample.repository.PostRepository;
 import com.supercoding.project_sample.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.Tuple;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -29,9 +37,36 @@ public class PostService {
     private final LikePostRepository likePostRepository;
     private final UserRepository userRepository;
 
+
+    @Transactional
+    public List<LikePostResponse> getAllPosts(Long userId) throws IllegalAccessException {
+        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+        List<PostEntity> postEntities = postRepository.findAll();
+        List<LikePostEntity> likePostEntities = likePostRepository.findByUserEntity_Id(user.getId());
+        Set<Long> likedPostIds = likePostEntities.stream().map((e) -> e.getPostEntity().getId()).collect(Collectors.toSet());
+
+        return postEntities.stream().map((p) -> {
+            LikePostResponse likePostResponse = new LikePostResponse();
+            likePostResponse.setId(p.getId());
+            likePostResponse.setTitle(p.getTitle());
+            likePostResponse.setContent(p.getContent());
+            likePostResponse.setAuthor(p.getAuthor().getEmail());
+            likePostResponse.setCreateAt(p.getCreateAt());
+            likePostResponse.setLikeCount(p.getLiked());
+            likePostResponse.setIsLiked(likedPostIds.contains(p.getId()));
+            return likePostResponse;
+        }).collect(Collectors.toList());
+    }
+
     public List<PostEntity> findPostList() {
         return postRepository.findAll();
     }
+
+    @Transactional
+    public List<LikePostEntity> findLikeList(Long userId) {
+        return likePostRepository.findByUserEntity_Id(userId);
+    }
+
 
     public PostEntity createPost(String title, String content, long userId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
@@ -74,6 +109,7 @@ public class PostService {
         }
     }
 
+
     @Transactional
     public String updateLikeOfPost(Long postId, Long userId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
@@ -103,7 +139,6 @@ public class PostService {
         LikePostEntity likePostEntity = likePostRepository.findByPostEntityAndUserEntity(postEntity, userEntity)
                 .orElseThrow(LikeHistoryNotfoundException::new);
         likePostRepository.delete(likePostEntity);
-
         return SUCCESS_UNLIKE_BOARD;
     }
 

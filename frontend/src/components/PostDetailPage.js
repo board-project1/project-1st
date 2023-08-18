@@ -62,7 +62,11 @@ const PostDetailPage = () => {
       body: JSON.stringify({
         content: content,
       }),
-    }).catch((err) => console.error(err));
+    })
+    .then(() => {
+      window.location.reload(); // 페이지 데이터 리로드
+    })
+    .catch((err) => console.error(err));
   };
 
   const changeComment = (commentId, comment) => {
@@ -95,6 +99,30 @@ const PostDetailPage = () => {
       .then(() => {
         setNewCommnent({ content: '', author: '' }); // 댓글 작성 후 입력란 초기화
         fetchData(); // 댓글을 다시 가져옵니다.
+      })
+      .then(() => {
+        window.location.reload(); // 페이지 데이터 리로드
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleCommentDelete = async (id) => {
+    const token = localStorage.getItem('Authorization');
+    const postId = post.id;
+
+    await fetch(`http://localhost:8080/api/comments/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // 토큰을 헤더에 포함
+      },
+      body: JSON.stringify({
+        postId: postId,
+      }),
+    })
+      .then(() => fetchData()) // 댓글을 다시 가져옵니다.
+      .then(() => {
+        window.location.reload(); // 페이지 데이터 리로드
       })
       .catch((err) => console.error(err));
   };
@@ -158,6 +186,7 @@ const PostDetailPage = () => {
     {c?.created_at || ''}
     </Typography>
     <CustomButton style={{ backgroundColor: blue[500] }} onClick={() => handleCommentChange(c.id, c.content)}>수정</CustomButton>
+    <CustomButton style={{ backgroundColor: red[500] }} onClick={() => handleCommentDelete(c.id)}>삭제</CustomButton>
     </CardContent>
     </Card>
     )))

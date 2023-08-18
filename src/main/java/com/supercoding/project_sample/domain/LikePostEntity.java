@@ -20,10 +20,12 @@ public class LikePostEntity {
 
     @ManyToOne
     @JoinColumn(name = "post_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PostEntity postEntity;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity userEntity;
 
     // true = 좋아요 false = 좋아요 취소

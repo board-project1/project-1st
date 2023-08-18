@@ -1,8 +1,9 @@
 package com.supercoding.project_sample.controller;
 
+import com.supercoding.project_sample.domain.LikePostEntity;
 import com.supercoding.project_sample.domain.PostEntity;
-import com.supercoding.project_sample.domain.UserEntity;
 import com.supercoding.project_sample.dto.AuthInfo;
+import com.supercoding.project_sample.dto.LikePostResponse;
 import com.supercoding.project_sample.dto.PostRequest;
 import com.supercoding.project_sample.dto.PostResponse;
 import com.supercoding.project_sample.exception.IllegalAccessException;
@@ -26,13 +27,18 @@ public class PostController {
 
     // 게시물 전체 조회하는 API
     @GetMapping("/posts")
-    public List<PostEntity> findPostList() {
-        return postService.findPostList();
+    public List<LikePostResponse> findPostList(AuthInfo authInfo) throws IllegalAccessException {
+        return postService.getAllPosts(authInfo.getMemberId());
     }
+
+//    @GetMapping("/posts/like")
+//    public List<LikePostEntity> findLikeList(AuthInfo authInfo) {
+//        return postService.findLikeList(authInfo.getMemberId());
+//    }
 
     // 작성자 이메일을 통해 특정 게시물들을 검색하는 API
     @GetMapping("/posts/search")
-    public List<PostEntity> findPostByEmail(@RequestParam String email) throws IllegalAccessException {
+    public List<PostEntity> findPostByEmail(@RequestParam String email) {
         return postService.findPostListByEmail(email);
     }
 
@@ -74,7 +80,6 @@ public class PostController {
             @PathVariable Long postId) throws IllegalAccessException {
         return ResponseEntity.ok(postService.updateLikeOfPost(postId, authInfo.getMemberId()));
     }
-
 
     // 노션
     // 게시물을 새롭게 만들 수 있는 API

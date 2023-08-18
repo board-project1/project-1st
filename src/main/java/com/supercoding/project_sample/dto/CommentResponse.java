@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Builder

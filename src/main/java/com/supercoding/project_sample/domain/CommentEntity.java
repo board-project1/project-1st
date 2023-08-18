@@ -2,6 +2,8 @@ package com.supercoding.project_sample.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -21,6 +23,7 @@ public class CommentEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity author;
 
     @Column
@@ -29,6 +32,7 @@ public class CommentEntity {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PostEntity postId;
 
     @Column

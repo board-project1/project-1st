@@ -1,8 +1,11 @@
 package com.supercoding.project_sample.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.time.Instant;
 import java.time.LocalDateTime ;
 
@@ -26,6 +29,7 @@ public class PostEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity author;
 
     @Column(name = "created_at")

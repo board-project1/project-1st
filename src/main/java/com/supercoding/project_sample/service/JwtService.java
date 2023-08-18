@@ -32,7 +32,7 @@ public class JwtService {
     }
 
     public String encode(Long memberId){
-        LocalDateTime  expiredAt = LocalDateTime .now().plusWeeks(4L);
+        LocalDateTime expiredAt = LocalDateTime.now().plusWeeks(4L);
         Date date = Timestamp.valueOf(expiredAt);
 
         return JWT.create()
@@ -42,9 +42,6 @@ public class JwtService {
     }
 
     public Map<String, Long> decode(String token) {
-        System.out.println("=======================");
-        System.out.println(token);
-        System.out.println("=======================");
         try{
             DecodedJWT jwt = jwtVerifier.verify(token);
             return Map.of(CLAIM_NAME_MEMBER_ID, jwt.getClaim(CLAIM_NAME_MEMBER_ID).asLong());

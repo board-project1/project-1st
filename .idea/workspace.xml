@@ -5,11 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7410c200-6c4a-422b-b404-cad22238a16f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/config/ModelMapperConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/LikePostResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ListPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/PostDetailPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PostDetailPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/LogoutRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/LogoutRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/domain/CommentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/domain/CommentEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/domain/LikePostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/domain/LikePostEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/domain/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/domain/PostEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/AuthInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/AuthInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/CommentResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/CommentResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/dto/PostResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/repository/LikePostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/repository/LikePostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/supercoding/project_sample/service/PostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +34,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

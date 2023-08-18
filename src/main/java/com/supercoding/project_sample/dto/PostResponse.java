@@ -1,10 +1,12 @@
 package com.supercoding.project_sample.dto;
 
+import com.supercoding.project_sample.domain.LikePostEntity;
 import com.supercoding.project_sample.domain.PostEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Builder
@@ -18,6 +20,8 @@ public class PostResponse {
     private String author;
     private String nickname;
     private LocalDateTime createAt;
+    private int liked;
+    private Boolean status;
 
     public static PostResponse from(PostEntity postEntity) {
         return PostResponse.builder()
@@ -31,4 +35,13 @@ public class PostResponse {
                 .build();
     }
 
+    public PostResponse(Long postId, String title, String content, LocalDateTime createAt, String author, int liked, Boolean status) {
+        this.postId = postId;
+        this.title = title;
+        this.content = content;
+        this.createAt = createAt;
+        this.author = author;
+        this.liked = liked;
+        this.status = status;
+    }
 }
