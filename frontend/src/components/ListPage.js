@@ -28,18 +28,21 @@ const ListPage = () => {
   }, []);
 
   const logoutHandler = async () => {
-    const email = localStorage.getItem('email');
-    if (!email) {
+    const token = localStorage.getItem('Authorization');
+  
+    if (!token) {
       navigate('/login');
       return;
     }
     await fetch(`http://localhost:8080/api/logout`, {
       method: 'POST',
-      body: JSON.stringify({
-        email
-      })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // 토큰을 헤더에 포함
+      },
     }).then(res => res.json()).then(() => {
       navigate('/login');
+      localStorage.removeItem('Authorization');
     }).catch((error) => console.error(error));
     ;
   };
