@@ -40,7 +40,7 @@ public class CommentController {
 //        return ResponseEntity.ok(CommentResponse.from(commentEntity));
 //    }
 
-    // 댓글 삭제
+    // 댓글 삭제 API
     @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<String> deleteComment(AuthInfo authInfo,
                                                          @PathVariable Long commentId,
@@ -59,13 +59,13 @@ public class CommentController {
 
     // 노션 기준
 
-    // 전체 댓글 조회
+    // 전체 댓글 조회 API
     @GetMapping("/comments")
     public List<CommentEntity> findCommentAll() {
         return commentService.findCommentAll();
     }
 
-    // 댓글 생성
+    // 댓글 생성 API
     @PostMapping("/comments")
     public ResponseEntity<CommentResponse> createComment2(AuthInfo authInfo,
                                                           @RequestBody CommentRequest commentRequest) throws IllegalAccessException {
@@ -74,7 +74,7 @@ public class CommentController {
         return ResponseEntity.ok(CommentResponse.from(commentEntity));
     }
 
-    // 댓글 수정
+    // 댓글 수정 API
     @PutMapping("/comments/{commentId}")
     public ResponseEntity<CommentResponse> updateComment2(AuthInfo authInfo,
                                                          @PathVariable Long commentId,

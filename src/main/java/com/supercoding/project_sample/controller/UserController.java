@@ -22,6 +22,7 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
+    // 회원가입 API
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signup(@RequestBody SignUpRequest signUpRequest){
         boolean isSuccess = userService.signUp(signUpRequest);
@@ -32,6 +33,7 @@ public class UserController {
         }
     }
 
+    // 로그인 API
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest, HttpServletResponse httpServletResponse) throws Exception {
         String token = userService.login(loginRequest);
@@ -48,6 +50,7 @@ public class UserController {
         }
     }
 
+    // 로그아웃 API
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@RequestBody LogoutRequest logoutRequest) {
         boolean isLoggedOut = userService.logout(logoutRequest.getToken());

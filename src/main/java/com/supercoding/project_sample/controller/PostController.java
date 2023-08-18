@@ -25,7 +25,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    // 게시물 전체 조회하는 API
+    // 게시글 전체 조회 API
     @GetMapping("/posts")
     public List<LikePostResponse> findPostList(AuthInfo authInfo) throws IllegalAccessException {
         return postService.getAllPosts(authInfo.getMemberId());
@@ -54,7 +54,7 @@ public class PostController {
 //        return ResponseEntity.ok(PostResponse.from(postEntity));
 //    }
 
-    // 기존 댓글의 글을 수정하는 API
+    // 게시글 수정 API
     @PutMapping("/posts/{postId}")
     public ResponseEntity<String> updatePost(
             AuthInfo authInfo,
@@ -65,6 +65,7 @@ public class PostController {
         return ResponseEntity.ok("댓글이 수정되었습니다.");
     }
 
+    // 게시글 삭제 API
     @DeleteMapping("/{postId}/delete")
     public ResponseEntity<Void> deletePost(
             AuthInfo authInfo,
@@ -82,7 +83,7 @@ public class PostController {
     }
 
     // 노션
-    // 게시물을 새롭게 만들 수 있는 API
+    // 게시물 생성 API
     @PostMapping("/posts")
     public ResponseEntity<PostResponse> createPost2(
             AuthInfo authInfo,

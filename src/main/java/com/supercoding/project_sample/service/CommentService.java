@@ -28,40 +28,41 @@ public class CommentService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 
-    public List<CommentEntity> findCommentList(Long postId) {
-        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
-        return commentRepository.findByPostId(post);
-    }
+//    public List<CommentEntity> findCommentList(Long postId) {
+//        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+//        return commentRepository.findByPostId(post);
+//    }
+//
+//    public CommentEntity createComment(String content, Long postId, Long userId) throws IllegalAccessException {
+//        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+//        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+//
+//        return commentRepository.save(
+//                CommentEntity.builder()
+//                        .author(user)
+//                        .postId(post)
+//                        .content(content)
+//                        .createAt(LocalDateTime.now())
+//                        .build()
+//        );
+//    }
+//
+//    @Transactional
+//    public CommentEntity updateComment(String content, Long postId, Long userId, Long commentId) throws IllegalAccessException {
+//        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+//        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+//        CommentEntity comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
+//
+//        if (post.getId().equals(postId) && user.getId().equals(comment.getAuthor().getId())) {
+//            comment.setContent(content);
+//            comment.setUpdateAt(LocalDateTime.now());
+//
+//            commentRepository.save(comment);
+//        }
+//        return comment;
+//    }
 
-    public CommentEntity createComment(String content, Long postId, Long userId) throws IllegalAccessException {
-        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
-        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
-
-        return commentRepository.save(
-                CommentEntity.builder()
-                        .author(user)
-                        .postId(post)
-                        .content(content)
-                        .createAt(LocalDateTime.now())
-                        .build()
-        );
-    }
-
-    @Transactional
-    public CommentEntity updateComment(String content, Long postId, Long userId, Long commentId) throws IllegalAccessException {
-        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
-        PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
-        CommentEntity comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
-
-        if (post.getId().equals(postId) && user.getId().equals(comment.getAuthor().getId())) {
-            comment.setContent(content);
-            comment.setUpdateAt(LocalDateTime.now());
-
-            commentRepository.save(comment);
-        }
-        return comment;
-    }
-
+    // 댓글 삭제
     public CommentEntity deleteComment(Long postId, Long userId, Long commentId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
         PostEntity post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
@@ -74,12 +75,14 @@ public class CommentService {
     }
 
 
+    // 댓글 조회
     public List<CommentEntity> findCommentAll() {
         return commentRepository.findAll();
     }
 
 
     // 노션
+    // 댓글 생성
     @Transactional
     public CommentEntity createComment2(String content, String nickname, Long postId, Long userId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
@@ -94,6 +97,8 @@ public class CommentService {
                         .build()
         );
     }
+
+    // 댓글 수정
     @Transactional
     public CommentEntity updateComment2(String content, Long userId, Long commentId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);

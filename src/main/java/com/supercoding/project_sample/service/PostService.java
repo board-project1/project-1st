@@ -38,6 +38,7 @@ public class PostService {
     private final UserRepository userRepository;
 
 
+    // 전체 게시글 조회 (좋아요 추가)
     @Transactional
     public List<LikePostResponse> getAllPosts(Long userId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
@@ -58,33 +59,27 @@ public class PostService {
         }).collect(Collectors.toList());
     }
 
-    public List<PostEntity> findPostList() {
-        return postRepository.findAll();
-    }
 
+//    public PostEntity createPost(String title, String content, long userId) throws IllegalAccessException {
+//        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
+//
+//        return postRepository.save(
+//                PostEntity.builder()
+//                        .title(title)
+//                        .content(content)
+//                        .author(user)
+//                        .createAt(LocalDateTime.now())
+//                        .build()
+//        );
+//    }
+
+    // 이메일 조회
     @Transactional
-    public List<LikePostEntity> findLikeList(Long userId) {
-        return likePostRepository.findByUserEntity_Id(userId);
-    }
-
-
-    public PostEntity createPost(String title, String content, long userId) throws IllegalAccessException {
-        UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
-
-        return postRepository.save(
-                PostEntity.builder()
-                        .title(title)
-                        .content(content)
-                        .author(user)
-                        .createAt(LocalDateTime.now())
-                        .build()
-        );
-    }
-
     public List<PostEntity> findPostListByEmail(String email) {
         return postRepository.findAllByAuthor_Email(email);
     }
 
+    // 게시글 수정
     @Transactional
     public void updatePost(long userId, long postId, PostRequest postRequest) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
@@ -99,6 +94,7 @@ public class PostService {
         }
     }
 
+    // 게시글 삭제
     @Transactional
     public void deletePost(long userId, long postId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
@@ -109,7 +105,7 @@ public class PostService {
         }
     }
 
-
+    // 게시글 좋아요
     @Transactional
     public String updateLikeOfPost(Long postId, Long userId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
@@ -125,16 +121,20 @@ public class PostService {
         return removeLikePost(post, user);
     }
 
-
+    // 좋아요 확인
     private boolean hasLikePost(PostEntity postEntity, UserEntity userEntity) {
         return likePostRepository.findByPostEntityAndUserEntity(postEntity, userEntity)
                 .isPresent();
     }
+
+    // 좋아요 추가
     private String createLikePost(PostEntity postEntity, UserEntity userEntity) {
         LikePostEntity likePostEntity = new LikePostEntity(postEntity, userEntity);
         likePostRepository.save(likePostEntity);
         return SUCCESS_LIKE_BOARD;
     }
+
+    // 좋아요 삭제
     private String removeLikePost(PostEntity postEntity, UserEntity userEntity) {
         LikePostEntity likePostEntity = likePostRepository.findByPostEntityAndUserEntity(postEntity, userEntity)
                 .orElseThrow(LikeHistoryNotfoundException::new);
@@ -142,6 +142,7 @@ public class PostService {
         return SUCCESS_UNLIKE_BOARD;
     }
 
+    // 게시글 생성
     @Transactional
     public PostEntity createPost2(String title, String content, String nickname, Long userId) throws IllegalAccessException {
         UserEntity user = userRepository.findById(userId).orElseThrow(IllegalAccessException::new);
