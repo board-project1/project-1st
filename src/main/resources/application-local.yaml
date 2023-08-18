@@ -16,4 +16,5 @@ spring:
     properties:
       hibernate:
         format_sql: true # SQL pretty print
-
+jwt:
+  secretKey: supercoding

@@ -61,7 +61,7 @@ public class PostController {
             @RequestBody PostRequest postRequest) throws IllegalAccessException {
 
         postService.updatePost(authInfo.getMemberId(), postId, postRequest);
-        return ResponseEntity.ok("댓글이 수정되었습니다.");
+        return ResponseEntity.ok("게시글이 수정되었습니다.");
     }
 
     // 게시글 삭제 API
