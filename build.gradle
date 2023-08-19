@@ -29,14 +29,17 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'com.mysql:mysql-connector-java'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
     // jwt
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'com.auth0:java-jwt:4.4.0'
+
+    // ModelMapper
+    implementation 'org.modelmapper:modelmapper:2.4.4'
 }
 
 tasks.named('test') {

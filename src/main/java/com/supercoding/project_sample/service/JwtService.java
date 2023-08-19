@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime ;
 import java.util.Date;
 import java.util.Map;
 
 @Slf4j
 @Service
 public class JwtService {
-    @Value("supercoding")
+    @Value("${jwt.secretKey}")
     private String secretKey; // jacypt(?) 암호화
 
     public static final String CLAIM_NAME_MEMBER_ID = "MemberId";

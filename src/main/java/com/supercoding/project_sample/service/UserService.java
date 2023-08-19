@@ -62,4 +62,8 @@ public class UserService {
 
 
     }
+
+    public boolean logout(String token) {
+        return true;
+    }
 }
