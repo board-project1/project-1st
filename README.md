@@ -244,4 +244,4 @@ a. 파라미터 : 게시글 ID, 제목, 내용
 깡통 프론트 web page link -> https://github.com/dev-owen/fe-dashboard
 
 #### application.yaml 파일에 JWT secret key 가 포함되어 있어 따로 올리지 않았습니다. 
-#### 파일 구동시 application.yaml 파일을 수정 후 실행 해주시기 바랍니다.
+#### 파일 구동시 application.yaml 파일을 생성 및 수정 후 실행 해주시기 바랍니다.
