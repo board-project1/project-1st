@@ -1,4 +1,7 @@
 # 📋 게시판 프로젝트
+<br>
+
+
 ## 🧑‍💻 팀장 및 팀원 정보
   - 팀장 : 이민혁
   - 팀원 : 김가은, 백지영
@@ -239,9 +242,6 @@ a. 파라미터 : 게시글 ID, 제목, 내용
 6. merge된 API를 Postman으로 테스트 하고 제공된 깡통 프론트와 연결하여 테스트를 한다.
 7. 프론트와 API가 맞지 않는 부분을 수정하고 프론트에 추가적인 기능을 추가한다.
 8. 모든 확인이 끝난 후 base branch를 main branch에 merge 한다.
-
-
-깡통 프론트 web page link -> https://github.com/dev-owen/fe-dashboard
 
 #### application.yaml 파일에 JWT secret key 가 포함되어 있어 따로 올리지 않았습니다. 
 #### 파일 구동시 application.yaml 파일을 생성 및 수정 후 실행 해주시기 바랍니다.
